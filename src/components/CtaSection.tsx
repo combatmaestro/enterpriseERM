@@ -1,45 +1,55 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
 const CtaSection = () => {
   return (
-    <div className="bg-saas-darkGray py-16 md:py-20">
-      <div className="section-container">
-        <div className="bg-gradient-to-r from-saas-orange/20 to-amber-600/20 rounded-2xl p-8 md:p-12 relative overflow-hidden">
-          {/* Abstract glow effect */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-saas-orange opacity-20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-600 opacity-10 rounded-full blur-3xl"></div>
-          
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-2/3">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to transform your business?
-              </h2>
-              <p className="text-gray-300 mb-6 max-w-xl">
-                Join thousands of companies that are already streamlining their operations and growing their business with Enterprise.AI. Start your free trial today.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-saas-orange hover:bg-orange-600 text-white font-semibold">
-                  Start Free Trial
-                </Button>
-                <Button variant="outline" className="border-background text-white hover:bg-white hover:text-saas-black hover:border-white">
-                  Schedule Demo
-                </Button>
+    <section className="py-24 md:py-32 bg-[#161C28] text-white px-6 md:px-16">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start"> 
+        <div className="flex flex-col justify-center space-y-6 md:space-y-8">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl/snug font-bold text-white leading-snug">
+            Take Control of Risk <br /> Today
+          </h3>
+          <p className="text-gray-300 text-base sm:text-lg md:text-lg leading-relaxed">
+            With Enterprise.AI, risk management becomes a business enabler, not a burden. 
+            Streamline processes, stay compliant, and make smarter decisions across the enterprise. 
+            Start leveraging AI-driven insights to transform the way your organization manages risk.
+          </p>
+        </div>
+
+        {/* Right content */}
+        <div className="flex justify-center">
+          <div className="bg-[#222938] text-white p-6 md:p-8 lg:p-10 space-y-6 rounded-xl shadow-soft max-w-md w-full">
+            <img src='Group 223.svg' className='object-contain w-full max-w-xs mx-auto h-24' alt="Illustration" />
+            <form className="space-y-4">
+              <div className="flex flex-col">
+                <label htmlFor="Email" className="mb-1 text-sm font-medium">Email</label>
+                <input 
+                  id='Email' 
+                  type="email"
+                  className="w-full rounded-md px-4 py-3 text-sm bg-white text-slate-800 border border-transparent focus:outline-none focus:ring-2 focus:ring-[#1A049E]/50" 
+                  placeholder="Enter your email" 
+                />
               </div>
-            </div>
-            
-            <div className="md:w-1/3">
-              <img 
-                src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=300&h=300&q=80"
-                alt="Dashboard Preview"
-                className="rounded-lg w-full card-shadow"
-              />
-            </div>
+
+              <div className="flex flex-col">
+                <label htmlFor="Message" className='mb-1 text-sm font-medium'>Message</label>
+                <textarea 
+                  id='Message' 
+                  rows={4}
+                  className="w-full rounded-md px-4 py-3 text-sm bg-white text-slate-800 border border-transparent focus:outline-none focus:ring-2 focus:ring-[#1A049E]/50" 
+                  placeholder="Your message"
+                />
+              </div>
+
+              <Button variant="default" type="submit" className="w-full btn-primary py-3 text-white font-semibold">
+                Request Demo
+              </Button>
+            </form>
           </div>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 
