@@ -1,114 +1,60 @@
-// src/components/Navbar.jsx
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const NAV_ITEMS = [
-  { name: "Home", to: "/" },
-  { name: "About", to: "/about" },
-  { name: "Blog", to: "/blog" },
-
-  { name: "Contact", to: "/contact" },
-];
-
-const Navbar = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-saas-black bg-opacity-90 backdrop-blur-sm sticky top-0 z-50 border-b border-saas-darkGray">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <NavLink to="/" className="flex items-center">
-              <span className="text-2xl font-bold bg-gradient-to-r from-saas-orange to-amber-500 bg-clip-text text-transparent">
-                Enterprise.AI
-              </span>
-            </NavLink>
+    <nav className="bg-white fixed w-full top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex justify-between items-center h-16">
+          <div >
+            <img src="logo.svg" alt="Company logo" className="object-contain"/>
           </div>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive ? "text-saas-orange" : "text-white hover:text-saas-orange"
-                  }`
-                }
-              >
-                {item.name}
-              </NavLink>
-            ))}
-
-            {/* CTA / external */}
-            {/* <a
-              href="https://codescandy.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2"
-            >
-              <Button className="bg-saas-orange hover:bg-orange-600 text-black font-semibold">
-                Get Template
-              </Button>
-            </a> */}
+          <div className="hidden md:flex space-x-8 text-gray-500 font-normal">
+            <a href="#home" className="hover:text-[#2F2E8B]">Home</a>
+            <a href="#features" className="hover:text-[#2F2E8B]">Product</a>
+            <a href="#faq" className="hover:text-[#2F2E8B]">FAQ</a>
+            <a href="#features" className="hover:text-[#2F2E8B]">Blog</a>
+            <a href="#about" className="hover:text-[#2F2E8B]">About Us</a>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen((s) => !s)}
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-              className="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="ghost" className="text-gray-400">Login</Button>
+            <Button className="btn-primary text-foreground hover:bg-[#262577] text-white">
+              Sign Up
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X className="w-6 h-6 text-textPrimary" /> : <Menu className="w-6 h-6 text-textPrimary" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden transition-max-height duration-300 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-[800px]" : "max-h-0"
-        }`}
-      >
-        <div className="bg-saas-darkGray px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block px-3 py-2 text-base font-medium ${
-                  isActive ? "text-saas-orange" : "text-white hover:text-saas-orange"
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
-
-          <div className="mt-4 px-3 pb-4">
-            {/* <a
-              href="https://codescandy.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full block"
-            >
-              <Button className="w-full bg-saas-orange hover:bg-orange-600 text-black font-semibold">
-                Get Template
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white shadow-md">
+          <div className="px-6 py-4 space-y-4">
+            <a href="#home" className="block text-gray-700 hover:text-[#2F2E8B]">Home</a>
+            <a href="#features" className="block text-gray-700 hover:text-[#2F2E8B]">Product</a>
+            <a href="#faq" className="block text-gray-700 hover:text-[#2F2E8B]">FAQ</a>
+            <a href="#about" className="block text-gray-700 hover:text-[#2F2E8B]">About Us</a>
+            <div className="flex flex-col gap-3 pt-4 border-t">
+              <Button variant="ghost" className="text-textPrimary">Login</Button>
+              <Button className="bg-[#2F2E8B] hover:bg-[#262577] text-white">
+                Sign Up
               </Button>
-            </a> */}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
-};
-
-export default Navbar;
+}
