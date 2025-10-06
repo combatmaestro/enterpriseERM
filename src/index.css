@@ -1,116 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
-    --background: 24 5% 6%;
-    --foreground: 24 10% 95%;
+    --background: 0 0% 100%; /* White */
+    --foreground: 222 47% 11%; /* #111827 */
 
-    --card: 24 5% 10%;
-    --card-foreground: 24 10% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 24 5% 6%;
-    --popover-foreground: 24 10% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 24 100% 50%;
-    --primary-foreground: 24 10% 10%;
+    --primary: 243 50% 36%; /* #2F2E8B */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 24 5% 15%;
-    --secondary-foreground: 24 10% 95%;
+    --secondary: 240 30% 12%; /* #0D0D2B */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 24 5% 15%;
-    --muted-foreground: 24 5% 65%;
+    --muted: 220 14% 96%; /* #F9F9FB */
+    --muted-foreground: 220 8% 46%; /* #6B7280 */
 
-    --accent: 24 100% 50%;
-    --accent-foreground: 24 10% 10%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 24 10% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 24 5% 20%;
-    --input: 24 5% 20%;
-    --ring: 24 100% 50%;
+    --border: 220 13% 91%; /* light gray */
+    --input: 220 13% 91%;
+    --ring: 243 50% 36%;
 
     --radius: 0.75rem;
-    
-    /* Social Media Colors */
-    --twitter: 203 89% 53%;
-    --facebook: 221 44% 41%;
-    --linkedin: 210 90% 40%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
-  
-  /* Adding styles for blog content */
-  .prose h1, .prose h2, .prose h3, .prose h4 {
-    @apply text-white font-bold;
+
+  h1, h2, h3, h4 {
+    @apply font-bold text-gray-900;
   }
-  
-  .prose h1 {
-    @apply text-3xl md:text-4xl;
-  }
-  
-  .prose h2 {
-    @apply text-2xl md:text-3xl mt-8 mb-4;
-  }
-  
-  .prose h3 {
-    @apply text-xl md:text-2xl mt-6 mb-3;
-  }
-  
-  .prose p {
-    @apply text-gray-300 mb-4;
-  }
-  
-  .prose a {
-    @apply text-saas-orange hover:text-orange-500 transition-colors;
-  }
-  
-  .prose ul, .prose ol {
-    @apply text-gray-300 mb-4 pl-6;
-  }
-  
-  .prose ul {
-    @apply list-disc;
-  }
-  
-  .prose ol {
-    @apply list-decimal;
-  }
-  
-  .prose blockquote {
-    @apply border-l-4 border-saas-orange pl-4 italic my-6 text-gray-300;
-  }
-  
-  .prose code {
-    @apply bg-saas-darkGray px-1 py-0.5 rounded text-gray-300;
-  }
-  
-  .prose pre {
-    @apply bg-saas-darkGray p-4 rounded-lg mb-6 overflow-x-auto;
-  }
-  
-  .prose img {
-    @apply rounded-lg my-6;
-  }
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl; }
+  p  { @apply text-gray-600; }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-saas-orange hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+    @apply bg-[#120174] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#262577] transition;
   }
 
   .btn-secondary {
-    @apply bg-secondary hover:bg-saas-darkGray text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+    @apply bg-white border border-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition;
   }
 
   .section-container {
@@ -118,63 +64,12 @@
   }
 
   .card-shadow {
-    @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+    @apply bg-card rounded-xl shadow-lg p-6;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent;
-  }
-  
-  /* Add animation utilities */
-  .animate-fade-in {
-    @apply opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_forwards];
-  }
-  
-  /* Adding line-clamp utilities */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  /* Add hover effects for cards */
-  .hover-zoom {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-[#2F2E8B] to-[#0D0D2B] bg-clip-text text-transparent font-bold;
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-/* Add additional orange glow animation */
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(249, 115, 22, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
-  }
-}
-
-.pulse-orange {
-  animation: pulseGlow 2s infinite;
-}

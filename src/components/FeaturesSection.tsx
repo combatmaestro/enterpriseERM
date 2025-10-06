@@ -1,86 +1,66 @@
-
-import React from 'react';
-import { Check, Search, Settings, User, Home, Calendar } from 'lucide-react';
+import { Activity, Check, Command, PieChart } from "lucide-react";
+import React from "react";
 
 const features = [
   {
-    icon: <Search className="h-6 w-6 text-saas-orange" />,
-    title: 'Unified Risk View',
-    description: 'Consolidate financial, operational, compliance, cybersecurity,and strategic risks into a single, accessible platform.'
+    icon: Activity,
+    title: "Unified Risk View",
+    desc: "Get complete visibility by consolidating all risks into one platform.",
   },
   {
-    icon: <Settings className="h-6 w-6 text-saas-orange" />,
-    title: 'Data-Driven Prioritization',
-    description: 'Use real-time scoring, trend analysis, and visual heat maps to focus on the risks that matter most.'
+    icon: PieChart,
+    title: "Smart Prioritization",
+    desc: "Focus on critical risks with real-time scoring and heat maps.",
   },
   {
-    icon: <User className="h-6 w-6 text-saas-orange" />,
-    title: 'Built for Enterprise Collaboration',
-    description: 'Enable seamless communication between risk managers, business units, and leadership with configurable workflows and approval processes.'
+    icon: Command,
+    title: "Seamless Collaboration",
+    desc: "Keep teams aligned with workflows, alerts, and smooth communication.",
   },
   {
-    icon: <Home className="h-6 w-6 text-saas-orange" />,
-    title: 'Regulatory Alignment',
-    description: 'Stay prepared for audits and regulatory reviews with compliance mapping across ISO 27001, SOC 2, HIPAA, NIST 800-53,FedRAMP, and more.'
+    icon: Check,
+    title: "Regulatory Ready",
+    desc: "Stay audit-ready with built-in compliance mapping across global standards.",
   },
-  {
-    icon: <Calendar className="h-6 w-6 text-saas-orange" />,
-    title: 'Scalable and Secure',
-    description: 'Whether you operate regionally or globally, Enterprise.AI scales with your business and meets the highest security standards.'
-  },
-  {
-    icon: <Check className="h-6 w-6 text-saas-orange" />,
-    title: 'Workflow Automation',
-    description: 'Streamline risk assessments, incident reporting,approvals, and follow-up actions with automated workflows.'
-  },
-  {
-    icon: <Check className="h-6 w-6 text-saas-orange" />,
-    title: 'Risk Register',
-    description: 'A centralized, structured repository for identifying, categorizing, and tracking risks across the enterprise.'
-  },
-   {
-    icon: <Check className="h-6 w-6 text-saas-orange" />,
-    title: 'Dynamic Dashboards and Analytics',
-    description: 'A centralized, structured repository for identifying, categorizing, and tracking risks across the enterprise.'
-  },
-  {
-    icon: <Check className="h-6 w-6 text-saas-orange" />,
-    title: 'Compliance Management',
-    description: 'Map risks directly to relevant controls, frameworks,and regulatory requirements.'
-  }
 ];
 
 const FeaturesSection = () => {
   return (
-    <div className="bg-saas-black py-16 md:py-24">
-      <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Powerful <span className="gradient-text">Features</span> to Boost Your Business
+    <section id="product" className="sm:py-16 py-10 px-6 md:px-16">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+        {/* Left side */}
+        <div>
+          <h2 className="sm:text-4xl/relaxed text-3xl max-sm:text-center font-semibold mb-4">
+            Why Choose <br /> Enterprise.AI?
           </h2>
-          <p className="text-gray-400">
-            Our comprehensive suite of tools will help you streamline operations 
-            and achieve your business goals more efficiently.
+          <p className="text-secondary max-w-lg">
+            Enterprise.AI empowers organizations to manage all types of
+            enterprise risks in one unified platform with clarity and precision.
+            From real-time insights to seamless collaboration and regulatory
+            compliance, it helps your teams act smarter, faster, and more
+            confidently.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className="bg-saas-darkGray p-6 rounded-xl border border-gray-800 hover:border-saas-orange/50 transition-all duration-300 card-shadow"
-              style={{animationDelay: `${index * 0.1}s`}}
-            >
-              <div className="bg-saas-orange/10 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
-                {feature.icon}
+
+        {/* Right side */}
+        <div className="space-y-11">
+          {features.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <div key={i} className="feature-card flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-xl p-2 bg-white shadow-lg shadow-gray-200 flex items-center justify-center text-primary">
+                  <Icon size={22} strokeWidth={2} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-textPrimary">{f.title}</h3>
+                  <p className="text-md text-secondary max-w-md">{f.desc}</p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
