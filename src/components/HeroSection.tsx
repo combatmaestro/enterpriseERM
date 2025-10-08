@@ -5,7 +5,11 @@ export default function Hero() {
     <section
       id="home"
       className="pt-28 pb-16 bg-gradient-to-b from-white to-white"
+  style={{
+    background: "linear-gradient(90deg, rgba(223, 223, 223, 1) 0%, rgba(29, 253, 253, 0.24) 85%)"
+  }}
     >
+
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 md:gap-10 gap-12 items-center">
         <div>
           <h1 className="text-4xl/3 md:text-5xl/snug font-bold mb-6 text-textPrimary leading-relaxed">
