@@ -41,7 +41,7 @@ export default function Footer(){
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-8 text-gray-400 text-sm">© 2025 EnterpriseRM.AI Inc. All rights reserved.</div>
+      <div className="max-w-7xl mx-auto mt-8 text-gray-400 text-sm">© 2025 EnterpriseRM.AI . All rights reserved.</div>
     </footer>
   );
 }
