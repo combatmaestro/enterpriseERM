@@ -35,7 +35,7 @@ const CtaSection = () => {
     setLoading(true);
     try {
       // Replace with your actual API endpoint
-      const res = await fetch("https://cyber-vie-learning-platform-client-ten.vercel.app/admin/enterprise-leads", {
+      const res = await fetch("https://cyber-vie-learning-platform-client-ten.vercel.app/user/admin/enterprise-leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
