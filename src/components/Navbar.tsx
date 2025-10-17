@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom"; // ✅ import Link
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,15 +10,16 @@ export default function Navbar() {
     <nav className="bg-white fixed w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center h-16">
-          <div >
+          <div>
             <img src="logo.svg" alt="Company logo" className="object-contain"/>
           </div>
 
+          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 text-gray-500 font-normal">
             <a href="#home" className="hover:text-[#2F2E8B]">Home</a>
             <a href="#features" className="hover:text-[#2F2E8B]">Product</a>
             <a href="#faq" className="hover:text-[#2F2E8B]">FAQ</a>
-            <a href="#features" className="hover:text-[#2F2E8B]">Blog</a>
+            <Link to="/blogs" className="hover:text-[#2F2E8B]">Blog</Link> {/* ✅ React Router link */}
             <a href="#about" className="hover:text-[#2F2E8B]">About Us</a>
           </div>
 
@@ -45,6 +47,7 @@ export default function Navbar() {
             <a href="#home" className="block text-gray-700 hover:text-[#2F2E8B]">Home</a>
             <a href="#features" className="block text-gray-700 hover:text-[#2F2E8B]">Product</a>
             <a href="#faq" className="block text-gray-700 hover:text-[#2F2E8B]">FAQ</a>
+            <Link to="/blogs" className="block text-gray-700 hover:text-[#2F2E8B]">Blog</Link> {/* ✅ */}
             <a href="#about" className="block text-gray-700 hover:text-[#2F2E8B]">About Us</a>
             <div className="flex flex-col gap-3 pt-4 border-t">
               <Button variant="ghost" className="text-textPrimary">Login</Button>
