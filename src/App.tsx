@@ -9,7 +9,7 @@ import Contact from "./pages/Contact";
 import BlogList from "./pages/BlogList";
 import BlogPost from "./pages/BlogPost";
 import EnterpriseBlogsList from "./pages/EnterpriseBlogsList";
-
+import BlogDetail from "./pages/BlogDetail";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -23,7 +23,7 @@ const App = () => (
     <Route path="/about" element={<About />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/blogs" element={<EnterpriseBlogsList />} />
-    <Route path="/blog/:slug" element={<BlogPost />} />
+    <Route path="/blog/:slug" element={<BlogDetail  />} />
   </Routes>
 </BrowserRouter>
     </TooltipProvider>

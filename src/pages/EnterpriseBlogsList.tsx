@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
+
 const EnterpriseBlogsList = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,9 @@ const EnterpriseBlogsList = () => {
     fetchBlogs();
   }, []);
 
+  const createSlug = (title) =>
+    title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
@@ -46,19 +51,24 @@ const EnterpriseBlogsList = () => {
               key={blog._id}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
-              <div className="p-6">
+              <div className="p-6 flex flex-col h-full">
                 <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
                 <p
-                  className="text-gray-700 mb-4"
+                  className="text-gray-700 mb-4 flex-grow"
                   dangerouslySetInnerHTML={{
-                    __html: blog.content.length > 150
-                      ? blog.content.substring(0, 150) + "..."
-                      : blog.content,
+                    __html:
+                      blog.content.length > 150
+                        ? blog.content.substring(0, 150) + "..."
+                        : blog.content,
                   }}
                 />
-                <button className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded">
+                <Link
+                  to={`/blogs/${createSlug(blog.title)}`}
+                  state={{ blog }}
+                  className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded text-center"
+                >
                   Read More
-                </button>
+                </Link>
               </div>
             </div>
           ))}
