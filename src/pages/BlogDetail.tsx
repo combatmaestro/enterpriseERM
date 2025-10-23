@@ -13,7 +13,7 @@ export default function BlogDetails() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await fetch("https://cyber-vie-learning-platform-client-ten.vercel.app/blogs");
+        const response = await fetch("https://cyber-vie-learning-platform-client-ten.vercel.app/blogs/");
         const data = await response.json();
 
         // match slug with blog title (converted to slug)
