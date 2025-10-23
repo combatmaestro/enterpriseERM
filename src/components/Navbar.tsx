@@ -14,7 +14,7 @@ export default function Navbar() {
           {/* ✅ Clickable logo that routes to homepage */}
           <Link to="/" className="flex items-center">
             <img
-              src="logo.svg"
+              src="/logo.svg"
               alt="Company logo"
               className="object-contain cursor-pointer h-10"
             />

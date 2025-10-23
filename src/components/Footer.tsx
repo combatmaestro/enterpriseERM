@@ -6,7 +6,7 @@ export default function Footer(){
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6">
         <div>
           <div className="font-bold text-lg">
-              <img src="Footer_logo.svg" alt="Company logo" className="object-contain"/>
+              <img src="/Footer_logo.svg" alt="Company logo" className="object-contain"/>
           </div>
           <p className="text-sm text-gray-300 mt-4">Get started now — try our product</p>
           <div className="mt-4">
