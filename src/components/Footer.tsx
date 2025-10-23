@@ -10,7 +10,7 @@ export default function Footer(){
           </div>
           <p className="text-sm text-gray-300 mt-4">Get started now — try our product</p>
           <div className="mt-4">
-            <input className="rounded-full bg-transparent border border-gray-400 px-4 py-2 w-full text-white" placeholder="Enter your email here" />
+            {/* <input className="rounded-full bg-transparent border border-gray-400 px-4 py-2 w-full text-white" placeholder="Enter your email here" /> */}
           </div>
         </div>
 
