@@ -1,4 +1,5 @@
 import animatePlugin from "tailwindcss-animate";
+import typographyPlugin from "@tailwindcss/typography"; // ✅ add this
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -52,9 +53,9 @@ const config: Config = {
           DEFAULT: "#EF4444",
           foreground: "#ffffff",
         },
-		textPrimary:{
-			DEFAULT:"#191A15"
-		}
+        textPrimary: {
+          DEFAULT: "#191A15",
+        },
       },
       borderRadius: {
         lg: "0.75rem",
@@ -72,7 +73,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [animatePlugin],
+  plugins: [animatePlugin, typographyPlugin], // ✅ add typography here
 };
 
 export default config;

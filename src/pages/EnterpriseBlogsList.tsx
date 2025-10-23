@@ -62,13 +62,13 @@ const EnterpriseBlogsList = () => {
                         : blog.content,
                   }}
                 />
-                <Link
-                   to={`/blogs/${blog.title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "")}`}
-                  state={{ blog }}
-                  className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded text-center"
-                >
-                  Read More
-                </Link>
+               <Link
+  to={`/blogs/${createSlug(blog.title)}`}
+  state={{ blog }}
+  className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded text-center mt-auto"
+>
+  Read More
+</Link>
               </div>
             </div>
           ))}

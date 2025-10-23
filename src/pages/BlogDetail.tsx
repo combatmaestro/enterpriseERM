@@ -3,23 +3,22 @@ import { useParams, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const BlogDetails = () => {
+const BlogDetail = () => {
   const { slug } = useParams();
   const location = useLocation();
-
-  // If the blog was passed via Link state, we can use it directly
   const [blog, setBlog] = useState(location.state?.blog || null);
   const [loading, setLoading] = useState(!location.state?.blog);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // If blog already passed via state, no need to fetch again
     if (location.state?.blog) return;
 
     const fetchBlog = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://cyber-vie-learning-platform-client-ten.vercel.app/blogs/");
+        const response = await fetch(
+          "https://cyber-vie-learning-platform-client-ten.vercel.app/blogs/"
+        );
         const data = await response.json();
 
         const foundBlog = data.data.find(
@@ -42,22 +41,35 @@ const BlogDetails = () => {
     fetchBlog();
   }, [slug, location.state]);
 
+  if (loading)
+    return <div className="text-center mt-20 text-gray-500">Loading...</div>;
+  if (error)
+    return <div className="text-center mt-20 text-red-500">{error}</div>;
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
 
       <main className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {loading && <div className="text-center text-gray-500">Loading...</div>}
-        {error && <div className="text-center text-red-500">{error}</div>}
-
         {blog && (
-          <article className="bg-white rounded-xl shadow-md p-8">
-            <h1 className="text-3xl font-bold mb-4 text-[#2F2E8B]">{blog.title}</h1>
-            <p className="text-sm text-gray-500 mb-6">
-              {new Date(blog.createdAt).toLocaleDateString()}
-            </p>
+          <article className="bg-white rounded-xl shadow-md p-8 md:p-12">
+            {/* Blog Header */}
+            <header className="mb-10 border-b pb-6">
+              <h1 className="text-4xl font-bold text-[#2F2E8B] leading-tight mb-3">
+                {blog.title}
+              </h1>
+              <p className="text-sm text-gray-500">
+                {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </header>
+
+            {/* Blog Content (Rich HTML) */}
             <div
-              className="prose max-w-none text-gray-800"
+              className="prose prose-lg max-w-none prose-img:rounded-lg prose-headings:text-[#2F2E8B] prose-a:text-[#2F2E8B] hover:prose-a:underline prose-strong:text-gray-900"
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
           </article>
@@ -69,4 +81,4 @@ const BlogDetails = () => {
   );
 };
 
-export default BlogDetails;
+export default BlogDetail;
