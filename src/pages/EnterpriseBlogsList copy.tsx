@@ -49,29 +49,12 @@ const EnterpriseBlogsList = () => {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
+              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
-              {/* ✅ Thumbnail section */}
-              {blog.thumbnail ? (
-                <img
-                  src={blog.thumbnail.startsWith("http")
-                    ? blog.thumbnail
-                    : `https://cyber-vie-learning-platform-client-ten.vercel.app${blog.thumbnail}`
-                  }
-                  alt={blog.title}
-                  className="w-full h-52 object-cover"
-                />
-              ) : (
-                <div className="w-full h-52 bg-gray-200 flex items-center justify-center text-gray-400">
-                  No Image
-                </div>
-              )}
-
-              {/* ✅ Content section */}
               <div className="p-6 flex flex-col h-full">
-                <h2 className="text-xl font-semibold mb-2 line-clamp-2">{blog.title}</h2>
+                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
                 <p
-                  className="text-gray-700 mb-4 flex-grow line-clamp-3"
+                  className="text-gray-700 mb-4 flex-grow"
                   dangerouslySetInnerHTML={{
                     __html:
                       blog.content.length > 150
@@ -79,13 +62,13 @@ const EnterpriseBlogsList = () => {
                         : blog.content,
                   }}
                 />
-                <Link
-                  to={`/blogs/${createSlug(blog.title)}`}
-                  state={{ blog }}
-                  className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded text-center mt-auto"
-                >
-                  Read More
-                </Link>
+               <Link
+  to={`/blogs/${createSlug(blog.title)}`}
+  state={{ blog }}
+  className="bg-[#2F2E8B] hover:bg-[#262577] text-white px-4 py-2 rounded text-center mt-auto"
+>
+  Read More
+</Link>
               </div>
             </div>
           ))}
