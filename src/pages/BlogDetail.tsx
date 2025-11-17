@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -46,18 +47,53 @@ const BlogDetail = () => {
   if (error)
     return <div className="text-center mt-20 text-red-500">{error}</div>;
 
+  // ---- SEO Values ----
+  const pageTitle = blog?.title || "Blog";
+  const pageDescription =
+    blog?.content?.replace(/<[^>]+>/g, "").substring(0, 150) + "...";
+
+  const imageUrl = blog?.thumbnail?.startsWith("http")
+    ? blog.thumbnail
+    : `https://cyber-vie-learning-platform-client-ten.vercel.app${blog?.thumbnail}`;
+
+  const canonicalUrl = `https://your-domain.com/blogs/${slug}`;
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
+
+      {/* ✅ Helmet SEO Section */}
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        {imageUrl && <meta property="og:image" content={imageUrl} />}
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+      </Helmet>
+
       <Navbar />
 
       <main className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {blog && (
           <article className="bg-white rounded-xl shadow-md p-8 md:p-12">
-            {/* Blog Header */}
+
             <header className="mb-10 border-b pb-6">
               <h1 className="text-4xl font-bold text-[#2F2E8B] leading-tight mb-3">
                 {blog.title}
               </h1>
+
               <p className="text-sm text-gray-500">
                 {new Date(blog.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -67,7 +103,6 @@ const BlogDetail = () => {
               </p>
             </header>
 
-            {/* Blog Content (Rich HTML) */}
             <div
               className="prose prose-lg max-w-none prose-img:rounded-lg prose-headings:text-[#2F2E8B] prose-a:text-[#2F2E8B] hover:prose-a:underline prose-strong:text-gray-900"
               dangerouslySetInnerHTML={{ __html: blog.content }}

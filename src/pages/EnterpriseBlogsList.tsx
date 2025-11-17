@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const EnterpriseBlogsList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -34,6 +35,17 @@ const EnterpriseBlogsList = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
+
+      {/* ✅ Helmet Section */}
+      <Helmet>
+        <title>Enterprise Blogs | Latest Tech Insights & AI Trends</title>
+        <meta
+          name="description"
+          content="Explore blogs on AI, cybersecurity, enterprise automation, and tech trends. Updated weekly with expert-written articles."
+        />
+        <link rel="canonical" href="https://your-domain.com/blogs" />
+      </Helmet>
+
       <Navbar />
 
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -51,12 +63,12 @@ const EnterpriseBlogsList = () => {
               key={blog._id}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
             >
-              {/* ✅ Thumbnail section */}
               {blog.thumbnail ? (
                 <img
-                  src={blog.thumbnail.startsWith("http")
-                    ? blog.thumbnail
-                    : `https://cyber-vie-learning-platform-client-ten.vercel.app${blog.thumbnail}`
+                  src={
+                    blog.thumbnail.startsWith("http")
+                      ? blog.thumbnail
+                      : `https://cyber-vie-learning-platform-client-ten.vercel.app${blog.thumbnail}`
                   }
                   alt={blog.title}
                   className="w-full h-52 object-cover"
@@ -67,9 +79,9 @@ const EnterpriseBlogsList = () => {
                 </div>
               )}
 
-              {/* ✅ Content section */}
               <div className="p-6 flex flex-col h-full">
                 <h2 className="text-xl font-semibold mb-2 line-clamp-2">{blog.title}</h2>
+
                 <p
                   className="text-gray-700 mb-4 flex-grow line-clamp-3"
                   dangerouslySetInnerHTML={{
@@ -79,6 +91,7 @@ const EnterpriseBlogsList = () => {
                         : blog.content,
                   }}
                 />
+
                 <Link
                   to={`/blogs/${createSlug(blog.title)}`}
                   state={{ blog }}
