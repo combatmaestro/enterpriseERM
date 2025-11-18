@@ -15,15 +15,15 @@ const Index = () => {
     <>
       <Helmet>
         <title>Fluidfit.ai – AI Powered Business Automation</title>
-        <meta
-          name="description"
-          content="Automate workflows, boost efficiency, and scale your business using Fluidfit.ai's advanced AI capabilities."
-        />
-        <meta property="og:title" content="Fluidfit.ai – AI Powered Business Automation" />
-        <meta
-          property="og:description"
-          content="Automate workflows, boost efficiency, and scale your business using Fluidfit.ai's advanced AI capabilities."
-        />
+          <title>Enterprise Risk Management Software | Cloud ERM Solutions for Business Risk</title>
+
+    <meta
+      name="description"
+      content="Discover the best enterprise risk management (ERM) software to protect and grow your business. Enterprise.AI offers cloud ERM solutions that streamline your enterprise risk management framework and enhance compliance."
+    />
+    <meta name="keywords" content="enterprise risk management, ERM software, risk management solutions, cloud ERM, business risk management, enterprise risk management framework, what is ERM, best ERM software" />
+    <meta name="author" content="Enterprise.AI" />
+   
         <meta property="og:image" content="https://your-domain.com/og-image.png" />
         <meta name="robots" content="index, follow" />
       </Helmet>
