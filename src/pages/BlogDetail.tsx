@@ -59,16 +59,16 @@ const BlogDetail = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* SEO Helmet */}
+
       {blog && (
         <Helmet>
           {/* Title */}
-          <title>{blog?.metaTitle || blog?.title}</title>
+          <title>{blog.metaTitle || blog.title}</title>
 
-          {/* Meta Description */}
+          {/* Description */}
           <meta
             name="description"
-            content={blog?.metaDescription || pageDescription}
+            content={blog.metaDescription || pageDescription}
           />
 
           {/* Keywords */}
@@ -80,10 +80,10 @@ const BlogDetail = () => {
           <link rel="canonical" href={canonicalUrl} />
 
           {/* Open Graph */}
-          <meta property="og:title" content={blog?.metaTitle || blog?.title} />
+          <meta property="og:title" content={blog.metaTitle || blog.title} />
           <meta
             property="og:description"
-            content={blog?.metaDescription || pageDescription}
+            content={blog.metaDescription || pageDescription}
           />
           <meta property="og:type" content="article" />
           <meta property="og:url" content={canonicalUrl} />
@@ -91,10 +91,10 @@ const BlogDetail = () => {
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={blog?.metaTitle || blog?.title} />
+          <meta name="twitter:title" content={blog.metaTitle || blog.title} />
           <meta
             name="twitter:description"
-            content={blog?.metaDescription || pageDescription}
+            content={blog.metaDescription || pageDescription}
           />
           <meta name="twitter:image" content={imageUrl} />
 
@@ -107,32 +107,32 @@ const BlogDetail = () => {
                 "@type": "BlogPosting",
                 mainEntityOfPage: {
                   "@type": "WebPage",
-                  "@id": canonicalUrl,
+                  "@id": canonicalUrl
                 },
-                headline: blog?.title,
-                description: blog?.metaDescription || pageDescription,
-                image: imageUrl,
+                headline: blog.title,
+                description: blog.metaDescription || pageDescription,
+                image: [imageUrl],
                 author: {
                   "@type": "Organization",
                   name: "Enterpriserm.AI",
-                  url: "https://enterpriserm.ai",
+                  url: "https://enterpriserm.ai"
                 },
                 publisher: {
                   "@type": "Organization",
                   name: "Enterpriserm.AI",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://enterpriserm.ai/logo.png",
-                  },
+                    url: "https://enterpriserm.ai/logo.png"
+                  }
                 },
                 datePublished: blog?.createdAt,
                 dateModified: blog?.updatedAt || blog?.createdAt,
-                url: canonicalUrl,
-              }),
+                url: canonicalUrl
+              })
             }}
           />
 
-          {/* ⭐ Breadcrumb Rich Result Schema */}
+          {/* BreadcrumbList Schema */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -144,22 +144,22 @@ const BlogDetail = () => {
                     "@type": "ListItem",
                     position: 1,
                     name: "Home",
-                    item: "https://enterpriserm.ai/",
+                    item: "https://enterpriserm.ai/"
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Blogs",
-                    item: "https://enterpriserm.ai/blogs",
+                    item: "https://enterpriserm.ai/blogs"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
-                    name: blog?.title,
-                    item: canonicalUrl,
-                  },
-                ],
-              }),
+                    name: blog.title,
+                    item: canonicalUrl
+                  }
+                ]
+              })
             }}
           />
         </Helmet>
@@ -179,12 +179,11 @@ const BlogDetail = () => {
                 {new Date(blog.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
-                  day: "numeric",
+                  day: "numeric"
                 })}
               </p>
             </header>
 
-            {/* Blog HTML */}
             <div
               className="prose prose-lg max-w-none prose-img:rounded-lg prose-headings:text-[#2F2E8B] prose-a:text-[#2F2E8B] hover:prose-a:underline prose-strong:text-gray-900"
               dangerouslySetInnerHTML={{ __html: blog.content }}
