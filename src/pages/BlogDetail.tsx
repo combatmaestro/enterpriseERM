@@ -98,7 +98,7 @@ const BlogDetail = () => {
           />
           <meta name="twitter:image" content={imageUrl} />
 
-          {/* JSON-LD Schema (Fix: raw JSON using dangerouslySetInnerHTML) */}
+          {/* BlogPosting Schema */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -128,6 +128,37 @@ const BlogDetail = () => {
                 datePublished: blog?.createdAt,
                 dateModified: blog?.updatedAt || blog?.createdAt,
                 url: canonicalUrl,
+              }),
+            }}
+          />
+
+          {/* ⭐ Breadcrumb Rich Result Schema */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://enterpriserm.ai/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Blogs",
+                    item: "https://enterpriserm.ai/blogs",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: blog?.title,
+                    item: canonicalUrl,
+                  },
+                ],
               }),
             }}
           />
