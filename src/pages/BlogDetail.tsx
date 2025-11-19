@@ -48,7 +48,6 @@ const BlogDetail = () => {
     return <div className="text-center mt-20 text-red-500">{error}</div>;
 
   // ---- SEO Values ----
-  const pageTitle = blog?.title || "Blog";
   const pageDescription =
     blog?.content?.replace(/<[^>]+>/g, "").substring(0, 150) + "...";
 
@@ -60,20 +59,24 @@ const BlogDetail = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* ✅ Helmet SEO Section */}
+      {/* SEO Helmet */}
       {blog && (
         <Helmet>
+          {/* Title */}
           <title>{blog?.metaTitle || blog?.title}</title>
 
+          {/* Meta Description */}
           <meta
             name="description"
             content={blog?.metaDescription || pageDescription}
           />
 
+          {/* Keywords */}
           {blog?.metaKeywords?.length > 0 && (
             <meta name="keywords" content={blog.metaKeywords.join(", ")} />
           )}
 
+          {/* Canonical */}
           <link rel="canonical" href={canonicalUrl} />
 
           {/* Open Graph */}
@@ -95,36 +98,39 @@ const BlogDetail = () => {
           />
           <meta name="twitter:image" content={imageUrl} />
 
-          {/* JSON-LD Schema */}
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": canonicalUrl,
-              },
-              headline: blog?.title,
-              description: blog?.metaDescription || pageDescription,
-              image: imageUrl,
-              author: {
-                "@type": "Organization",
-                name: "Enterpriserm.AI",
-                url: "https://enterpriserm.ai",
-              },
-              publisher: {
-                "@type": "Organization",
-                name: "Enterpriserm.AI",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://enterpriserm.ai/logo.png",
+          {/* JSON-LD Schema (Fix: raw JSON using dangerouslySetInnerHTML) */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": canonicalUrl,
                 },
-              },
-              datePublished: blog?.createdAt,
-              dateModified: blog?.updatedAt || blog?.createdAt,
-              url: canonicalUrl,
-            })}
-          </script>
+                headline: blog?.title,
+                description: blog?.metaDescription || pageDescription,
+                image: imageUrl,
+                author: {
+                  "@type": "Organization",
+                  name: "Enterpriserm.AI",
+                  url: "https://enterpriserm.ai",
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Enterpriserm.AI",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://enterpriserm.ai/logo.png",
+                  },
+                },
+                datePublished: blog?.createdAt,
+                dateModified: blog?.updatedAt || blog?.createdAt,
+                url: canonicalUrl,
+              }),
+            }}
+          />
         </Helmet>
       )}
 
@@ -147,6 +153,7 @@ const BlogDetail = () => {
               </p>
             </header>
 
+            {/* Blog HTML */}
             <div
               className="prose prose-lg max-w-none prose-img:rounded-lg prose-headings:text-[#2F2E8B] prose-a:text-[#2F2E8B] hover:prose-a:underline prose-strong:text-gray-900"
               dangerouslySetInnerHTML={{ __html: blog.content }}
