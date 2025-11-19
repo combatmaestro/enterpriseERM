@@ -63,44 +63,44 @@ const BlogDetail = () => {
 
       {/* ✅ Helmet SEO Section */}
      <Helmet>
-  <title>{blog?.metaTitle || blog?.title}</title>
+        <title>{blog?.metaTitle || blog?.title}</title>
 
-  {/* Meta Description */}
-  <meta
-    name="description"
-    content={blog?.metaDescription || pageDescription}
-  />
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content={blog?.metaDescription || pageDescription}
+        />
 
-  {/* Meta Keywords */}
-  {blog?.metaKeywords?.length > 0 && (
-    <meta name="keywords" content={blog.metaKeywords.join(", ")} />
-  )}
+        {/* Meta Keywords */}
+        {blog?.metaKeywords?.length > 0 && (
+          <meta name="keywords" content={blog.metaKeywords.join(", ")} />
+        )}
 
-  {/* Canonical */}
-  <link rel="canonical" href={canonicalUrl} />
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
 
-  {/* Open Graph */}
-  <meta property="og:title" content={blog?.metaTitle || blog?.title} />
-  <meta
-    property="og:description"
-    content={blog?.metaDescription || pageDescription}
-  />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={canonicalUrl} />
-  {imageUrl && <meta property="og:image" content={imageUrl} />}
+        {/* Open Graph */}
+        <meta property="og:title" content={blog?.metaTitle || blog?.title} />
+        <meta
+          property="og:description"
+          content={blog?.metaDescription || pageDescription}
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        {imageUrl && <meta property="og:image" content={imageUrl} />}
 
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta
-    name="twitter:title"
-    content={blog?.metaTitle || blog?.title}
-  />
-  <meta
-    name="twitter:description"
-    content={blog?.metaDescription || pageDescription}
-  />
-  {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-</Helmet>
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={blog?.metaTitle || blog?.title}
+        />
+        <meta
+          name="twitter:description"
+          content={blog?.metaDescription || pageDescription}
+        />
+        {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    </Helmet>
 
 
       <Navbar />
