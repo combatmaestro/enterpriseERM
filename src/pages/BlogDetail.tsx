@@ -60,18 +60,18 @@ const BlogDetail = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-
       {/* ✅ Helmet SEO Section */}
-     <Helmet>
+      <Helmet>
+        {/* Dynamic Page Title */}
         <title>{blog?.metaTitle || blog?.title}</title>
 
-        {/* Meta Description */}
+        {/* Description */}
         <meta
           name="description"
           content={blog?.metaDescription || pageDescription}
         />
 
-        {/* Meta Keywords */}
+        {/* Keywords */}
         {blog?.metaKeywords?.length > 0 && (
           <meta name="keywords" content={blog.metaKeywords.join(", ")} />
         )}
@@ -89,26 +89,47 @@ const BlogDetail = () => {
         <meta property="og:url" content={canonicalUrl} />
         {imageUrl && <meta property="og:image" content={imageUrl} />}
 
-        {/* Twitter Card */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={blog?.metaTitle || blog?.title}
-        />
+        <meta name="twitter:title" content={blog?.metaTitle || blog?.title} />
         <meta
           name="twitter:description"
           content={blog?.metaDescription || pageDescription}
         />
         {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-    </Helmet>
 
+        {/* ✅ Article Schema JSON-LD (paste here) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: blog?.title,
+            description: blog?.metaDescription || pageDescription,
+            image: imageUrl,
+            author: {
+              "@type": "Organization",
+              name: "Enterpriserm.AI",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Enterpriserm.AI",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://enterpriserm.ai/og-image.jpg",
+              },
+            },
+            url: canonicalUrl,
+            datePublished: blog?.createdAt,
+            dateModified: blog?.updatedAt || blog?.createdAt,
+          })}
+        </script>
+      </Helmet>
 
       <Navbar />
 
       <main className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {blog && (
           <article className="bg-white rounded-xl shadow-md p-8 md:p-12">
-
             <header className="mb-10 border-b pb-6">
               <h1 className="text-4xl font-bold text-[#2F2E8B] leading-tight mb-3">
                 {blog.title}
