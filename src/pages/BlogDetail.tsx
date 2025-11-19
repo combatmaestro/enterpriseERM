@@ -62,26 +62,46 @@ const BlogDetail = () => {
     <div className="flex flex-col min-h-screen bg-gray-50">
 
       {/* ✅ Helmet SEO Section */}
-      <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
+     <Helmet>
+  <title>{blog?.metaTitle || blog?.title}</title>
 
-        {/* Canonical */}
-        <link rel="canonical" href={canonicalUrl} />
+  {/* Meta Description */}
+  <meta
+    name="description"
+    content={blog?.metaDescription || pageDescription}
+  />
 
-        {/* Open Graph */}
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={canonicalUrl} />
-        {imageUrl && <meta property="og:image" content={imageUrl} />}
+  {/* Meta Keywords */}
+  {blog?.metaKeywords?.length > 0 && (
+    <meta name="keywords" content={blog.metaKeywords.join(", ")} />
+  )}
 
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
-        {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-      </Helmet>
+  {/* Canonical */}
+  <link rel="canonical" href={canonicalUrl} />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={blog?.metaTitle || blog?.title} />
+  <meta
+    property="og:description"
+    content={blog?.metaDescription || pageDescription}
+  />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonicalUrl} />
+  {imageUrl && <meta property="og:image" content={imageUrl} />}
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content={blog?.metaTitle || blog?.title}
+  />
+  <meta
+    name="twitter:description"
+    content={blog?.metaDescription || pageDescription}
+  />
+  {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+</Helmet>
+
 
       <Navbar />
 
