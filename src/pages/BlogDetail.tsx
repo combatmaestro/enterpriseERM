@@ -100,28 +100,33 @@ const BlogDetail = () => {
 
         {/* ✅ Article Schema JSON-LD (paste here) */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: blog?.title,
-            description: blog?.metaDescription || pageDescription,
-            image: imageUrl,
-            author: {
-              "@type": "Organization",
-              name: "Enterpriserm.AI",
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "Enterpriserm.AI",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://enterpriserm.ai/og-image.jpg",
-              },
-            },
-            url: canonicalUrl,
-            datePublished: blog?.createdAt,
-            dateModified: blog?.updatedAt || blog?.createdAt,
-          })}
+          {`
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "${blog?.title}",
+  "description": "${(blog?.metaDescription || pageDescription).replace(
+    /"/g,
+    '\\"'
+  )}",
+  "image": "${imageUrl}",
+  "author": {
+    "@type": "Organization",
+    "name": "Enterpriserm.AI"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Enterpriserm.AI",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://enterpriserm.ai/og-image.jpg"
+    }
+  },
+  "url": "${canonicalUrl}",
+  "datePublished": "${blog?.createdAt}",
+  "dateModified": "${blog?.updatedAt || blog?.createdAt}"
+}
+`}
         </script>
       </Helmet>
 
