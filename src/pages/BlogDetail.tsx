@@ -61,74 +61,72 @@ const BlogDetail = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* ✅ Helmet SEO Section */}
-      <Helmet>
-        {/* Dynamic Page Title */}
-        <title>{blog?.metaTitle || blog?.title}</title>
+      {blog && (
+        <Helmet>
+          <title>{blog?.metaTitle || blog?.title}</title>
 
-        {/* Description */}
-        <meta
-          name="description"
-          content={blog?.metaDescription || pageDescription}
-        />
+          <meta
+            name="description"
+            content={blog?.metaDescription || pageDescription}
+          />
 
-        {/* Keywords */}
-        {blog?.metaKeywords?.length > 0 && (
-          <meta name="keywords" content={blog.metaKeywords.join(", ")} />
-        )}
+          {blog?.metaKeywords?.length > 0 && (
+            <meta name="keywords" content={blog.metaKeywords.join(", ")} />
+          )}
 
-        {/* Canonical */}
-        <link rel="canonical" href={canonicalUrl} />
+          <link rel="canonical" href={canonicalUrl} />
 
-        {/* Open Graph */}
-        <meta property="og:title" content={blog?.metaTitle || blog?.title} />
-        <meta
-          property="og:description"
-          content={blog?.metaDescription || pageDescription}
-        />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={canonicalUrl} />
-        {imageUrl && <meta property="og:image" content={imageUrl} />}
+          {/* Open Graph */}
+          <meta property="og:title" content={blog?.metaTitle || blog?.title} />
+          <meta
+            property="og:description"
+            content={blog?.metaDescription || pageDescription}
+          />
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content={canonicalUrl} />
+          <meta property="og:image" content={imageUrl} />
 
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog?.metaTitle || blog?.title} />
-        <meta
-          name="twitter:description"
-          content={blog?.metaDescription || pageDescription}
-        />
-        {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={blog?.metaTitle || blog?.title} />
+          <meta
+            name="twitter:description"
+            content={blog?.metaDescription || pageDescription}
+          />
+          <meta name="twitter:image" content={imageUrl} />
 
-        {/* ✅ Article Schema JSON-LD (paste here) */}
-        <script type="application/ld+json">
-          {`
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "${blog?.title}",
-  "description": "${(blog?.metaDescription || pageDescription).replace(
-    /"/g,
-    '\\"'
-  )}",
-  "image": "${imageUrl}",
-  "author": {
-    "@type": "Organization",
-    "name": "Enterpriserm.AI"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Enterpriserm.AI",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://enterpriserm.ai/og-image.jpg"
-    }
-  },
-  "url": "${canonicalUrl}",
-  "datePublished": "${blog?.createdAt}",
-  "dateModified": "${blog?.updatedAt || blog?.createdAt}"
-}
-`}
-        </script>
-      </Helmet>
+          {/* JSON-LD Schema */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": canonicalUrl,
+              },
+              headline: blog?.title,
+              description: blog?.metaDescription || pageDescription,
+              image: imageUrl,
+              author: {
+                "@type": "Organization",
+                name: "Enterpriserm.AI",
+                url: "https://enterpriserm.ai",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Enterpriserm.AI",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://enterpriserm.ai/logo.png",
+                },
+              },
+              datePublished: blog?.createdAt,
+              dateModified: blog?.updatedAt || blog?.createdAt,
+              url: canonicalUrl,
+            })}
+          </script>
+        </Helmet>
+      )}
 
       <Navbar />
 
