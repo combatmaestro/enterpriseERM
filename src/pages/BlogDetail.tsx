@@ -42,12 +42,84 @@ const BlogDetail = () => {
     fetchBlog();
   }, [slug, location.state]);
 
+  // RUN JSON-LD generator once blog is ready
+  useEffect(() => {
+    if (!blog || !window.addBlogSchema) return;
+
+    const pageDescription =
+      blog?.content?.replace(/<[^>]+>/g, "").substring(0, 150) + "...";
+
+    const imageUrl = blog?.thumbnail?.startsWith("http")
+      ? blog.thumbnail
+      : `https://cyber-vie-learning-platform-client-ten.vercel.app${blog?.thumbnail}`;
+
+    const canonicalUrl = `https://enterpriserm.ai/blogs/${slug}`;
+
+    // ---- BLOG POSTING SCHEMA ----
+    const blogPostingSchema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalUrl
+      },
+      headline: blog.title,
+      description: blog.metaDescription || pageDescription,
+      image: [imageUrl],
+      author: {
+        "@type": "Organization",
+        name: "Enterpriserm.AI",
+        url: "https://enterpriserm.ai"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Enterpriserm.AI",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://enterpriserm.ai/logo.png"
+        }
+      },
+      datePublished: blog?.createdAt,
+      dateModified: blog?.updatedAt || blog?.createdAt,
+      url: canonicalUrl
+    };
+
+    // ---- BREADCRUMB SCHEMA ----
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://enterpriserm.ai/"
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blogs",
+          item: "https://enterpriserm.ai/blogs"
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: blog.title,
+          item: canonicalUrl
+        }
+      ]
+    };
+
+    // Inject both using your global function
+    window.addBlogSchema(blogPostingSchema);
+    window.addBlogSchema(breadcrumbSchema);
+  }, [blog, slug]);
+
   if (loading)
     return <div className="text-center mt-20 text-gray-500">Loading...</div>;
   if (error)
     return <div className="text-center mt-20 text-red-500">{error}</div>;
 
-  // ---- SEO Values ----
   const pageDescription =
     blog?.content?.replace(/<[^>]+>/g, "").substring(0, 150) + "...";
 
@@ -62,24 +134,19 @@ const BlogDetail = () => {
 
       {blog && (
         <Helmet>
-          {/* Title */}
           <title>{blog.metaTitle || blog.title}</title>
 
-          {/* Description */}
           <meta
             name="description"
             content={blog.metaDescription || pageDescription}
           />
 
-          {/* Keywords */}
           {blog?.metaKeywords?.length > 0 && (
             <meta name="keywords" content={blog.metaKeywords.join(", ")} />
           )}
 
-          {/* Canonical */}
           <link rel="canonical" href={canonicalUrl} />
 
-          {/* Open Graph */}
           <meta property="og:title" content={blog.metaTitle || blog.title} />
           <meta
             property="og:description"
@@ -89,7 +156,6 @@ const BlogDetail = () => {
           <meta property="og:url" content={canonicalUrl} />
           <meta property="og:image" content={imageUrl} />
 
-          {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={blog.metaTitle || blog.title} />
           <meta
@@ -97,71 +163,6 @@ const BlogDetail = () => {
             content={blog.metaDescription || pageDescription}
           />
           <meta name="twitter:image" content={imageUrl} />
-
-          {/* BlogPosting Schema */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                mainEntityOfPage: {
-                  "@type": "WebPage",
-                  "@id": canonicalUrl
-                },
-                headline: blog.title,
-                description: blog.metaDescription || pageDescription,
-                image: [imageUrl],
-                author: {
-                  "@type": "Organization",
-                  name: "Enterpriserm.AI",
-                  url: "https://enterpriserm.ai"
-                },
-                publisher: {
-                  "@type": "Organization",
-                  name: "Enterpriserm.AI",
-                  logo: {
-                    "@type": "ImageObject",
-                    url: "https://enterpriserm.ai/logo.png"
-                  }
-                },
-                datePublished: blog?.createdAt,
-                dateModified: blog?.updatedAt || blog?.createdAt,
-                url: canonicalUrl
-              })
-            }}
-          />
-
-          {/* BreadcrumbList Schema */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Home",
-                    item: "https://enterpriserm.ai/"
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "Blogs",
-                    item: "https://enterpriserm.ai/blogs"
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 3,
-                    name: blog.title,
-                    item: canonicalUrl
-                  }
-                ]
-              })
-            }}
-          />
         </Helmet>
       )}
 
