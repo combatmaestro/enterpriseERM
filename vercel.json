@@ -1,4 +1,30 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*/",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.enterpriserm.ai" }],
+      "destination": "https://enterpriserm.ai/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "http://enterpriserm.ai" }],
+      "destination": "https://enterpriserm.ai/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "enterpriserm-ai.vercel.app" }],
+      "destination": "https://enterpriserm.ai/:path*",
+      "permanent": true
+    }
+  ],
+
   "rewrites": [
     {
       "source": "/sitemap/sitemap.xml",
