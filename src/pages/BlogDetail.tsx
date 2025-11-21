@@ -163,6 +163,7 @@ const BlogDetail = () => {
             content={blog.metaDescription || pageDescription}
           />
           <meta name="twitter:image" content={imageUrl} />
+           <meta name="robots" content="index, follow" />
         </Helmet>
       )}
 
