@@ -5,18 +5,18 @@
       "destination": "https://cyber-vie-learning-platform-client-ten.vercel.app/sitemap/sitemap.xml"
     },
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/blogs/:slug",
+      "destination": "/index.html",
+      "prerender": true
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html",
-      "prerender": true
+      "destination": "/"
     }
   ],
-   "headers": [
+  "headers": [
     {
-      "source": "/(.*)",
+      "source": "/blogs/:slug",
       "headers": [
         {
           "key": "X-Prerender-Token",
