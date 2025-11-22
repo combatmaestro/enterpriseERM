@@ -13,5 +13,16 @@
       "destination": "/index.html",
       "prerender": true
     }
+  ],
+   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Prerender-Token",
+          "value": "76XuOgebIMeuLe9MdXQ8"
+        }
+      ]
+    }
   ]
 }
